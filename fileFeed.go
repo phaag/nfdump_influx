@@ -115,9 +115,9 @@ func setupFileFeeder(scanDirs []string, bucket string, twin int, influxDB *influ
 	fileCnt := 0
 	for file := range fileChannel {
 		fmt.Printf("file path: %s Time: %v\r", file.fileName, file.timeSlot)
-		if err := nfFile.Open(file.fileName); err != nil {
-			panic(err)
-		}
+		//if err := nfFile.Open(file.fileName); err != nil {
+		//	panic(err)
+		//}
 		// nfFile.String()
 		stat := nfFile.Stat()
 		calculateRate(&stat, uint64(twin))
