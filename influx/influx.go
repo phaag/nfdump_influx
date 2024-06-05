@@ -34,7 +34,8 @@ import (
 	"fmt"
 	"nfinflux/nffile"
 	"time"
-
+	"regexp"
+	
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
 	"github.com/influxdata/influxdb-client-go/v2/api/write"
@@ -161,7 +162,8 @@ func (influxDB *InfluxDBConf) InsertStat(when time.Time, ident string, exporterI
 	if influxDB.writeAPI == nil {
 		return
 	}
-
+	reg, _ := regexp.Compile("[^a-zA-Z]+")
+        ident = reg.ReplaceAllString(ident, "")
 	writeAPI := influxDB.writeAPI
 
 	// create point proto tcp
